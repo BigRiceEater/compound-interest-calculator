@@ -26,10 +26,10 @@ const TextField = (props) => (
 );
 
 function App() {
-  const [principalValue, setPrincipalValue] = useState(100);
-  const [interestRatePerAnnum, setInterestRatePerAnnum] = useState(0.003);
+  const [principalValue, setPrincipalValue] = useState(10000);
+  const [interestRatePerAnnum, setInterestRatePerAnnum] = useState(0.00635);
   const [compoundFrequencyPerYear, setCompoundFrequencyPerYear] = useState(12);
-  const [depositTenorInYears, setDepositTenorInYears] = useState(1);
+  const [depositTenorInYears, setDepositTenorInYears] = useState(0.5);
   const [futureValue, setFutureValue] = useState(0);
   const [gainValue, setGainValue] = useState(0);
 
@@ -44,9 +44,9 @@ function App() {
 
   const calculateCompoundInterest = () => {
     const result =
-      (principalValue *
-        (1 + interestRatePerAnnum / compoundFrequencyPerYear)) **
-      (compoundFrequencyPerYear * depositTenorInYears);
+      principalValue *
+      (1 + interestRatePerAnnum / compoundFrequencyPerYear) **
+        (compoundFrequencyPerYear * depositTenorInYears);
     setFutureValue(result);
     setGainValue(result - principalValue);
   };
