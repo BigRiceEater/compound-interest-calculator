@@ -19,7 +19,7 @@ const InputField = (props) => (
   </Form.Group>
 );
 
-const TextField = (props) => (
+const NumberField = (props) => (
   <InputField label={props.label}>
     <Form.Control
       type="number"
@@ -87,12 +87,12 @@ function App() {
         </Row>
       </div>
       <Form>
-        <TextField
+        <NumberField
           label="Principal"
           value={principalValue}
           onChange={(evt) => setPrincipalValue(evt.target.value)}
         />
-        <TextField
+        <NumberField
           label="Interest Rate (p.a)"
           value={interestRatePerAnnum}
           onChange={(evt) => setInterestRatePerAnnum(evt.target.value)}
@@ -124,8 +124,8 @@ function App() {
           ]}
           onChange={(evt) => setDepositTenorInYears(evt.target.value)}
         />
-        <TextField label="Future Value" value={futureValue} readOnly />
-        <TextField label="Money Earned" value={gainValue} readOnly />
+        <NumberField label="Future Value" value={futureValue} readOnly />
+        <NumberField label="Money Earned" value={gainValue} readOnly />
       </Form>
     </div>
   );
