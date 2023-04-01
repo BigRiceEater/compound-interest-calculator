@@ -31,6 +31,21 @@ const NumberField = (props) => (
   </InputField>
 );
 
+const CurrencyField = (props) => (
+  <InputField label={props.label}>
+    <Form.Control
+      type="text"
+      placeholder="value"
+      value={props.value.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+      })}
+      readOnly={props.readOnly ? true : false}
+      onChange={props.onChange}
+    />
+  </InputField>
+);
+
 const SelectField = ({ label, options, onChange }) => (
   <InputField label={label}>
     <Form.Select onChange={onChange}>
@@ -52,16 +67,16 @@ function App() {
   const [interestRatePerAnnum, setInterestRatePerAnnum] = useState(0.00635);
   const [compoundFrequencyPerYear, setCompoundFrequencyPerYear] = useState(12);
   const [depositTenorInYears, setDepositTenorInYears] = useState(0.5);
-  const [futureValue, setFutureValue] = useState(0);
-  const [gainValue, setGainValue] = useState(0);
+  const [futureValue, setFutureValue] = useState(0.0);
+  const [gainValue, setGainValue] = useState(0.0);
 
   const calculateCompoundInterest = useCallback(() => {
     const result =
       principalValue *
       (1 + interestRatePerAnnum / compoundFrequencyPerYear) **
         (compoundFrequencyPerYear * depositTenorInYears);
-    setFutureValue(result.toFixed(2));
-    setGainValue((result - principalValue).toFixed(2));
+    setFutureValue(result);
+    setGainValue(result - principalValue);
   }, [
     principalValue,
     interestRatePerAnnum,
@@ -124,8 +139,8 @@ function App() {
           ]}
           onChange={(evt) => setDepositTenorInYears(evt.target.value)}
         />
-        <NumberField label="Future Value" value={futureValue} readOnly />
-        <NumberField label="Money Earned" value={gainValue} readOnly />
+        <CurrencyField label="Future Value" value={futureValue} readOnly />
+        <CurrencyField label="Money Earned" value={gainValue} readOnly />
       </Form>
     </div>
   );
