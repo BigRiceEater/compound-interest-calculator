@@ -13,7 +13,11 @@ const TextField = (props) => (
       {props.label}
     </Form.Label>
     <Col sm="5">
-      <Form.Control type="text" placeholder="value" />
+      <Form.Control
+        type="text"
+        placeholder="value"
+        readOnly={props.readOnly ? true : false}
+      />
     </Col>
   </Form.Group>
 );
@@ -26,6 +30,8 @@ function App() {
         <TextField label="Interest Rate Per Annum" />
         <TextField label="Compound Frequency Per Year" />
         <TextField label="Deposit Tenor in Years" />
+        <TextField label="Future Value" readOnly />
+        <TextField label="Gain" readOnly />
       </Form>
     </div>
   );
