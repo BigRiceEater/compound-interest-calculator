@@ -43,6 +43,10 @@ const SelectField = ({ label, options, onChange }) => (
   </InputField>
 );
 
+const MonthsPerYear = 12;
+const WeeksPerMonth = 4;
+const DaysPerWeek = 7;
+
 function App() {
   const [principalValue, setPrincipalValue] = useState(10000);
   const [interestRatePerAnnum, setInterestRatePerAnnum] = useState(0.00635);
@@ -103,9 +107,21 @@ function App() {
           ]}
           onChange={(evt) => setCompoundFrequencyPerYear(evt.target.value)}
         />
-        <TextField
+        <SelectField
           label="Deposit Tenor in Years"
-          value={depositTenorInYears}
+          options={[
+            { label: "1 Year", value: 12 / MonthsPerYear },
+            { label: "9 Months", value: 9 / MonthsPerYear },
+            { label: "6 Months", value: 6 / MonthsPerYear },
+            { label: "3 Months", value: 3 / MonthsPerYear },
+            { label: "2 Months", value: 2 / MonthsPerYear },
+            { label: "1 Month", value: 1 / MonthsPerYear },
+            { label: "1 Week", value: 1 / WeeksPerMonth / MonthsPerYear },
+            {
+              label: "A Day",
+              value: 1 / DaysPerWeek / WeeksPerMonth / MonthsPerYear,
+            },
+          ]}
           onChange={(evt) => setDepositTenorInYears(evt.target.value)}
         />
         <TextField label="Future Value" value={futureValue} readOnly />
