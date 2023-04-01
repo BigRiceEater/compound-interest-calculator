@@ -31,6 +31,18 @@ const TextField = (props) => (
   </InputField>
 );
 
+const SelectField = ({ label, options }) => (
+  <InputField label={label}>
+    <Form.Select>
+      {options.map(({ label, value }) => (
+        <option key={`${label}-${value}`} value={value}>
+          {label}
+        </option>
+      ))}
+    </Form.Select>
+  </InputField>
+);
+
 function App() {
   const [principalValue, setPrincipalValue] = useState(10000);
   const [interestRatePerAnnum, setInterestRatePerAnnum] = useState(0.00635);
@@ -81,9 +93,14 @@ function App() {
           value={interestRatePerAnnum}
           onChange={(evt) => setInterestRatePerAnnum(evt.target.value)}
         />
-        <TextField
+        <SelectField
           label="Compound Frequency Per Year"
-          value={compoundFrequencyPerYear}
+          options={[
+            { label: "Yearly", value: 1 },
+            { label: "Monthly", value: 12 },
+            { label: "Weekly", value: 52 },
+            { label: "Daily", value: 365 },
+          ]}
           onChange={(evt) => setCompoundFrequencyPerYear(evt.target.value)}
         />
         <TextField
