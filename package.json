@@ -2,6 +2,7 @@
   "name": "compound-interest-calculator",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://bigriceeater.github.io/compound-interest-calculator",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
