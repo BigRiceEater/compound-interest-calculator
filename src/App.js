@@ -1,4 +1,6 @@
 import "./App.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHandHoldingDollar } from "@fortawesome/free-solid-svg-icons";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -53,6 +55,17 @@ function App() {
 
   return (
     <div className="App">
+      <div className="App-header">
+        <Row>
+          <Col>
+            <FontAwesomeIcon
+              className="mb-5"
+              icon={faHandHoldingDollar}
+              style={{ fontSize: "128" }}
+            />
+          </Col>
+        </Row>
+      </div>
       <Form>
         <TextField
           label="Principal"
