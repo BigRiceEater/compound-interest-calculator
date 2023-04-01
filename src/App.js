@@ -31,9 +31,9 @@ const TextField = (props) => (
   </InputField>
 );
 
-const SelectField = ({ label, options }) => (
+const SelectField = ({ label, options, onChange }) => (
   <InputField label={label}>
-    <Form.Select>
+    <Form.Select onChange={onChange}>
       {options.map(({ label, value }) => (
         <option key={`${label}-${value}`} value={value}>
           {label}
