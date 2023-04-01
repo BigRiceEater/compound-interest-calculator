@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { useState, useEffect } from "react";
 
-const TextField = (props) => (
+const InputField = (props) => (
   <Form.Group
     as={Row}
     controlId={`formTextInput-${props.label}`}
@@ -15,16 +15,20 @@ const TextField = (props) => (
     <Form.Label column sm="7">
       {props.label}
     </Form.Label>
-    <Col sm="5">
-      <Form.Control
-        type="number"
-        placeholder="value"
-        value={props.value}
-        readOnly={props.readOnly ? true : false}
-        onChange={props.onChange}
-      />
-    </Col>
+    <Col sm="5">{props.children}</Col>
   </Form.Group>
+);
+
+const TextField = (props) => (
+  <InputField label={props.label}>
+    <Form.Control
+      type="number"
+      placeholder="value"
+      value={props.value}
+      readOnly={props.readOnly ? true : false}
+      onChange={props.onChange}
+    />
+  </InputField>
 );
 
 function App() {
