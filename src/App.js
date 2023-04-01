@@ -60,8 +60,8 @@ function App() {
       principalValue *
       (1 + interestRatePerAnnum / compoundFrequencyPerYear) **
         (compoundFrequencyPerYear * depositTenorInYears);
-    setFutureValue(result);
-    setGainValue(result - principalValue);
+    setFutureValue(result.toFixed(2));
+    setGainValue((result - principalValue).toFixed(2));
   }, [
     principalValue,
     interestRatePerAnnum,
