@@ -15,7 +15,7 @@ const TextField = (props) => (
     </Form.Label>
     <Col sm="5">
       <Form.Control
-        type="text"
+        type="number"
         placeholder="value"
         value={props.value}
         readOnly={props.readOnly ? true : false}
@@ -44,7 +44,8 @@ function App() {
 
   const calculateCompoundInterest = () => {
     const result =
-      (principalValue * (1 + interestRatePerAnnum / compoundFrequencyPerYear)) ^
+      (principalValue *
+        (1 + interestRatePerAnnum / compoundFrequencyPerYear)) **
       (compoundFrequencyPerYear * depositTenorInYears);
     setFutureValue(result);
     setGainValue(result - principalValue);
