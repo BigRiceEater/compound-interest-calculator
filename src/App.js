@@ -4,7 +4,7 @@ import { faHandHoldingDollar } from "@fortawesome/free-solid-svg-icons";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 const InputField = (props) => (
   <Form.Group
@@ -51,8 +51,13 @@ function App() {
   const [futureValue, setFutureValue] = useState(0);
   const [gainValue, setGainValue] = useState(0);
 
-  useEffect(() => {
-    calculateCompoundInterest();
+  const calculateCompoundInterest = useCallback(() => {
+    const result =
+      principalValue *
+      (1 + interestRatePerAnnum / compoundFrequencyPerYear) **
+        (compoundFrequencyPerYear * depositTenorInYears);
+    setFutureValue(result);
+    setGainValue(result - principalValue);
   }, [
     principalValue,
     interestRatePerAnnum,
@@ -60,14 +65,9 @@ function App() {
     depositTenorInYears,
   ]);
 
-  const calculateCompoundInterest = () => {
-    const result =
-      principalValue *
-      (1 + interestRatePerAnnum / compoundFrequencyPerYear) **
-        (compoundFrequencyPerYear * depositTenorInYears);
-    setFutureValue(result);
-    setGainValue(result - principalValue);
-  };
+  useEffect(() => {
+    calculateCompoundInterest();
+  }, [calculateCompoundInterest]);
 
   return (
     <div className="App">
