@@ -2,6 +2,7 @@ import "./App.css";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import { useState } from "react";
 
 const TextField = (props) => (
   <Form.Group
@@ -16,21 +17,31 @@ const TextField = (props) => (
       <Form.Control
         type="text"
         placeholder="value"
+        value={props.value}
         readOnly={props.readOnly ? true : false}
+        onChange={props.onChange}
       />
     </Col>
   </Form.Group>
 );
 
 function App() {
+  const [principalValue, setPrincipalValue] = useState(0);
+  const [futureValue, setFutureValue] = useState(0);
+
+  const calculateCompoundInterest = () => {};
+
   return (
     <div className="App">
       <Form>
-        <TextField label="Principal" />
+        <TextField
+          label="Principal"
+          onChange={(evt) => setPrincipalValue(evt.target.value)}
+        />
         <TextField label="Interest Rate Per Annum" />
         <TextField label="Compound Frequency Per Year" />
         <TextField label="Deposit Tenor in Years" />
-        <TextField label="Future Value" readOnly />
+        <TextField label="Future Value" value={principalValue} readOnly />
         <TextField label="Gain" readOnly />
       </Form>
     </div>
