@@ -93,12 +93,12 @@ function App() {
           onChange={(evt) => setPrincipalValue(evt.target.value)}
         />
         <TextField
-          label="Interest Rate Per Annum"
+          label="Interest Rate (p.a)"
           value={interestRatePerAnnum}
           onChange={(evt) => setInterestRatePerAnnum(evt.target.value)}
         />
         <SelectField
-          label="Compound Frequency Per Year"
+          label="Interest Payout Frequency"
           options={[
             { label: "Yearly", value: 1 },
             { label: "Monthly", value: 12 },
@@ -108,7 +108,7 @@ function App() {
           onChange={(evt) => setCompoundFrequencyPerYear(evt.target.value)}
         />
         <SelectField
-          label="Deposit Tenor in Years"
+          label="How Long"
           options={[
             { label: "1 Year", value: 12 / MonthsPerYear },
             { label: "9 Months", value: 9 / MonthsPerYear },
@@ -125,7 +125,7 @@ function App() {
           onChange={(evt) => setDepositTenorInYears(evt.target.value)}
         />
         <TextField label="Future Value" value={futureValue} readOnly />
-        <TextField label="Gain" value={gainValue} readOnly />
+        <TextField label="Money Earned" value={gainValue} readOnly />
       </Form>
     </div>
   );
