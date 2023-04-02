@@ -12,10 +12,10 @@ const InputField = (props) => (
     controlId={`formTextInput-${props.label}`}
     className="mb-3"
   >
-    <Form.Label column sm="7">
+    <Form.Label column xs="7">
       {props.label}
     </Form.Label>
-    <Col sm="5">{props.children}</Col>
+    <Col xs="5">{props.children}</Col>
   </Form.Group>
 );
 
