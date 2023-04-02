@@ -4,7 +4,9 @@ import { faHandHoldingDollar } from "@fortawesome/free-solid-svg-icons";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Navbar from "react-bootstrap/Navbar";
 import { useState, useEffect, useCallback } from "react";
+import packageJson from "../package.json";
 
 const InputField = (props) => (
   <Form.Group
@@ -142,6 +144,18 @@ function App() {
         <CurrencyField label="Future Value" value={futureValue} readOnly />
         <CurrencyField label="Money Earned" value={gainValue} readOnly />
       </Form>
+      <Navbar
+        className="Footer justify-content-center"
+        style={{
+          position: "fixed",
+          bottom: 0,
+          width: "100%",
+        }}
+      >
+        <Navbar.Brand style={{ color: "grey" }}>
+          Version {packageJson.version}
+        </Navbar.Brand>
+      </Navbar>
     </div>
   );
 }
