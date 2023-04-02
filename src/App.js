@@ -48,9 +48,9 @@ const CurrencyField = (props) => (
   </InputField>
 );
 
-const SelectField = ({ label, options, onChange }) => (
+const SelectField = ({ label, options, onChange, value }) => (
   <InputField label={label}>
-    <Form.Select onChange={onChange}>
+    <Form.Select onChange={onChange} value={value}>
       {options.map(({ label, value }) => (
         <option key={`${label}-${value}`} value={value}>
           {label}
@@ -66,7 +66,7 @@ const DaysPerWeek = 7;
 
 function App() {
   const [principalValue, setPrincipalValue] = useState(10000);
-  const [interestRatePerAnnum, setInterestRatePerAnnum] = useState(0.00635);
+  const [interestRatePerAnnum, setInterestRatePerAnnum] = useState(0.00625);
   const [compoundFrequencyPerYear, setCompoundFrequencyPerYear] = useState(12);
   const [depositTenorInYears, setDepositTenorInYears] = useState(0.5);
   const [futureValue, setFutureValue] = useState(0.0);
@@ -104,6 +104,40 @@ function App() {
         </Row>
       </div>
       <Form>
+        <SelectField
+          label="Presets"
+          options={[
+            { label: "ZA 0.31%", value: "zasavings" },
+            { label: "Hang Seng 0.623%", value: "hangseng" },
+            { label: "ZA 6 months 3.1%", value: "za3" },
+            { label: "ZA 3 months 2.5%", value: "za2" },
+          ]}
+          onChange={(evt) => {
+            const preset = evt.target.value;
+            switch (preset) {
+              case "zasavings":
+                setInterestRatePerAnnum(0.0031);
+                setCompoundFrequencyPerYear(365);
+                break;
+              case "hangseng":
+                setInterestRatePerAnnum(0.00625);
+                setCompoundFrequencyPerYear(12);
+                break;
+              case "za3":
+                setInterestRatePerAnnum(0.031);
+                setCompoundFrequencyPerYear(12);
+                setDepositTenorInYears(0.5);
+                break;
+              case "za2":
+                setInterestRatePerAnnum(0.025);
+                setCompoundFrequencyPerYear(12);
+                setDepositTenorInYears(0.25);
+                break;
+              default:
+                break;
+            }
+          }}
+        />
         <NumberField
           label="Principal"
           value={principalValue}
@@ -122,6 +156,7 @@ function App() {
             { label: "Weekly", value: 52 },
             { label: "Daily", value: 365 },
           ]}
+          value={compoundFrequencyPerYear}
           onChange={(evt) => setCompoundFrequencyPerYear(evt.target.value)}
         />
         <SelectField
@@ -139,6 +174,7 @@ function App() {
               value: 1 / DaysPerWeek / WeeksPerMonth / MonthsPerYear,
             },
           ]}
+          value={depositTenorInYears}
           onChange={(evt) => setDepositTenorInYears(evt.target.value)}
         />
         <CurrencyField label="Future Value" value={futureValue} readOnly />
